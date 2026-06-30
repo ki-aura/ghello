@@ -12,7 +12,8 @@ void WaitForKey() {
 	noecho();		  // Do not echo input characters to the screen
 	keypad(stdscr, TRUE); // Enable special keys like F1, arrow keys, etc.
 
-	printw("Press x to continue.\n");
+	printw("curses control \n");
+	mvprintw(3,1,"Press x to continue.\n");
 	refresh();
 	
 	// PATCH to stop signal blocking: Set a 100ms timeout so getch() becomes non-blocking 
@@ -21,14 +22,15 @@ void WaitForKey() {
 	
 	int ch;
 	while ((ch = getch()) != 'x') { 
-		// PATCH: Filter out the ERR return to avoid printing "-1"
-		if (ch == ERR) {
-			if(sigint_received) {
-				break;
-			}
-			continue;
+		// sigint_received is set async - check for signal
+		if(sigint_received) {
+			break;
 		}
-		printw("You pressed: %d\n", ch);
+
+		if(ch != ERR){
+			mvprintw(5,1,"You pressed: %d      \n", ch);
+		}
+		
 		refresh();
 	}
 
