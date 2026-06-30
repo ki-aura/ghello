@@ -1,4 +1,3 @@
-#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,15 +5,6 @@
 #include <stdbool.h>
 #include <errno.h>
 
-// =========== TO COMPILE WITH DEMO MAIN CODE =========================
-// cc -o options_demo long_opt.c -DDEMO
-// -g -O0 -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wcast-qual -fsanitize=address,undefined
-//
-// Sample Usage:
-// ./options_demo -q 2 -V -p "s" -e "d" -e "j" in da hous -d 3 -i --woo
-// ====================================================================
-
-#define _INCLUDE_INTERNAL_OPT_FUNCTIONS
 #include "long_opt.h"
 #include "ghello.h"
 

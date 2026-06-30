@@ -9,7 +9,7 @@ endif
 # Common flags
 CFLAGS_COMMON = 
 TARGET        = ghello
-SRC           = ghello.c long_opt.c 
+SRC           = ghello.c long_opt.c signal_handler.c mini_curses.c
 OBJ           = $(SRC:.c=.o)
 
 # NCURSES flags

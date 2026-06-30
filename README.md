@@ -1,29 +1,5 @@
-Framework 
+Generic command line programme Framework  based on Hello World
 
-If you just want the editor, install using homebrew
+signal handling
 
-brew tap ki-aura/ghello
-
-brew install ghello
-
-
-
-If you want to use the code you have implementations for:
-
-Red Black balance tree
-
-B+ balanced tree (used as DB implementations)
-
-single and double linked balanced trees
-
-khash & khashl hash tables
-
-ncurses 
-
-CDK extension over curses
-
-file handling and mmap mapping to memory
-
-clock that will run in your terminal 
-
-single and multi threaded asynchronous task schedulers
+options parsing

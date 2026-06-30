@@ -1,75 +1,26 @@
 #include "ghello.h"
 #include "long_opt.h"
-
-// Global variables
-volatile sig_atomic_t sigint_received = 0;
-
-///////////////////////////////////////////////////
-// startup and close down
-///////////////////////////////////////////////////
-
-
-int final_close(void) {
-	switch (sigint_received) {
-	case 1:
-		fputs("Ended by Ctrl+C\n", stderr);
-		return EXIT_FAILURE;
-	case 2:
-		fputs("Ended by Ctrl+\\\n", stderr);
-		return EXIT_FAILURE;
-	case 3:
-		fputs("Program Killed\n", stderr);
-		return EXIT_FAILURE;
-	case 4:
-		fputs("Unknown Cause of Exit\n", stderr);
-		return EXIT_FAILURE;
-	default:
-		return EXIT_SUCCESS;
-	}
-}
-
-
-void signal_handler(int signum) {
-	if (sigint_received == 0) {
-		if (signum == SIGINT)
-			sigint_received = 1;
-		else if (signum == SIGQUIT)
-			sigint_received = 2;
-		else if (signum == SIGTERM)
-			sigint_received = 3;
-		else
-			sigint_received = 4;	// unknown signal
-	}
-}
-
-void setup_signals(void) {
-	struct sigaction sa;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = signal_handler;
-//	sa.sa_flags = SA_RESTART;
-// changed from SA_RESTART to zero to avoid delay from get_ch() loop
-	sa.sa_flags = 0;
-
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
-	sigaction(SIGTERM, &sa, NULL);
-}
+#include "signal_handler.h"
+#include "mini_curses.h"
 
 int main(int argc, char *argv[])
 {
-	// handle signal interupts
+	// handle signal interrupts
 	setup_signals();
-
+	
 	// parse options
-	Options *opts = parse_options(argc, argv, NULL, true); 	  // no default operand required
-
+	Options *opts = parse_options(argc, argv, NULL, true);		// no default operand required
+	
+	// run an ncurses / keyboard handler function
+	WaitForKey();
+	if(sigint_received) {return signal_close();}
+	
+	// run a standard print and wait
 	for(int i = 0; i<opts->depth; i++) {
 		printf("Hello World\n");
 		}
-	sleep(4);
+	sleep(4);	// time to allow an interrupt to be tested
 	
-	// tidy up
-	int rc = final_close();
-	return rc;
+	// Final exit reports if closed successfully or by a signal
+	return signal_close();
 }
-
