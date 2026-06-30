@@ -1,9 +1,9 @@
 #include <ncurses.h>
 #include <locale.h>
 #include "signal_handler.h"
+#include "mini_curses.h"
 
-
-void WaitForKey() {
+void WaitForKey(void) {
 	setlocale(LC_ALL, ""); // Required for wide characters with ncurses
 
 	// Initialize the ncurses screen

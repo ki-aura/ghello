@@ -21,7 +21,7 @@
 #include <sys/mman.h>		// Provides memory management declarations (e.g., mmap, munmap)
 #include <unistd.h>		// Provides access to POSIX operating system API (e.g., fork, exec, read, close)
 
-#define GHELLO_VERSION "1.2.3"  
+#define GHELLO_VERSION "1.2.4"  
 
 // keys we need that aren't already defined by ncurses
 #define KEY_MAC_ENTER 10	// KEY_ENTER already defined as send key for terminal

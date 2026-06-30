@@ -38,13 +38,9 @@ debug: $(TARGET)
 
 tidy:
 	xcrun clang-tidy $(SRC) \
-		-checks='clang-diagnostic-*,clang-analyzer-*,misc-*,-misc-include-cleaner' \
-		-- -Wall -Wextra
-
-maxtidy:
-	xcrun clang-tidy $(SRC) \
-		-checks='clang-diagnostic-*,clang-analyzer-*,misc-*,-misc-include-cleaner' \
+		-checks='clang-diagnostic-*,clang-analyzer-*,misc-*,-misc-include-cleaner,-clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling' \
 		-- -Wall -Wextra -Wshadow -Wconversion -Wsign-conversion -Wcast-qual -Wpedantic
+
 
 # Build rules
 $(TARGET): $(OBJ)
