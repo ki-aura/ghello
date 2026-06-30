@@ -14,9 +14,6 @@
 #define OPT_D_MAX_DEPTH 6
 #define OPT_PATTERN_MAX_LEN 10
 
-// version to use in -v
-#define PROG_VERSION	"1.x.x"
-
 
 // ===============================
 // Public Struct for Options

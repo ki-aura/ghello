@@ -16,6 +16,7 @@
 
 #define _INCLUDE_INTERNAL_OPT_FUNCTIONS
 #include "long_opt.h"
+#include "ghello.h"
 
 // internal function prototypes
 static void print_help(Options *opts, const char *prog_name, const char *const default_operand, bool operands_are_not_required);
@@ -146,7 +147,7 @@ static void parse_options_complex_validation(Options* opts){
 // ============ VERSION FUNCTION ===================
 static void print_version(Options* opts, const char *prog_name) {
 	// If you want to hard code the programme name, add the line (void)prog_name; to stop compiler warnings
-	printf("%s version: %s\n", prog_name, PROG_VERSION);
+	printf("%s version: %s\n", prog_name, GHELLO_VERSION);
 	clean_up_and_exit(opts, EXIT_SUCCESS);
 }
 
