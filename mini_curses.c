@@ -21,13 +21,13 @@ void WaitForKey(void) {
 	timeout(100);
 	
 	int ch;
-	while ((ch = getch()) != 'x') { 
+	while ((ch = getch()) != 'x' && ch != 'X') { 
 		// sigint_received is set async - check for signal
 		if(sigint_received) {
 			break;
 		}
 
-		if(ch != ERR){
+		if(ch != ERR){ // this ignores signals or any other non-keys
 			mvprintw(5,1,"You pressed: %d      \n", ch);
 		}
 		

@@ -51,6 +51,7 @@ typedef struct {
 // Parses command-line options into a dynamically allocated Options struct.
 // Exits with error on invalid input.
 Options *parse_options(int argc, char *argv[], const char *default_operand, bool operands_are_not_required);
+void print_help(Options* opts, const char *prog_name, const char *const default_operand, bool operands_are_not_required);
 
 // Frees the Options structure and all its dynamically allocated members.
 void free_options(Options *opts);

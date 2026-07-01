@@ -9,7 +9,6 @@
 #include "ghello.h"
 
 // internal function prototypes
-static void print_help(Options *opts, const char *prog_name, const char *const default_operand, bool operands_are_not_required);
 static void print_version(Options *opts, const char *prog_name);
 static void free_string_array(char **array, int count);
 static void validate_option_int(Options *opts, const char *arg, const char *error_name,int *arg_value, int opt_min, int opt_max);
@@ -44,7 +43,7 @@ static struct option long_options[] = {
 static const char short_options[] = "hvq:d:ip:e:V"; // nothing here for --woo as no short option
   
 // ============ HELP FUNCTION ===================
-static void print_help(Options* opts, const char *prog_name, const char *const default_operand, bool operands_are_not_required) {
+void print_help(Options* opts, const char *prog_name, const char *const default_operand, bool operands_are_not_required) {
 	printf("Usage: %s [OPTIONS] FILE...\n", prog_name);
 	printf("\nOptions:\n");
 	printf("  -h, --help              Show this help message and exit\n");
