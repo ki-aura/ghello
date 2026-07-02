@@ -6,7 +6,7 @@
 volatile sig_atomic_t sigint_received = 0;
 
 static void err_output(char *msg){
-	FILE *log_file = fopen("signal_exit_log.txt", "w");
+	FILE *log_file = fopen("/Users/matt/Projects/ghello/signal_exit_log.txt", "w");
 	fputs(msg, stderr);
 	if (log_file != NULL) {
 		fputs(msg, log_file);
@@ -14,7 +14,8 @@ static void err_output(char *msg){
 	}
 }
 
-int signal_close(void) {
+// this just exits, do any clean up before calling this
+int signal_exit(void) {
 	
 	switch (sigint_received) {
 	case 1:
@@ -56,9 +57,10 @@ void setup_signals(void) {
 	struct sigaction sa;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = signal_handler;
-//	sa.sa_flags = SA_RESTART;
-//	changed from SA_RESTART to zero to avoid delay from get_ch() loop
-	sa.sa_flags = 0;
+//	sa.sa_flags = SA_RESTART; // continue with system call that was in progress when signal hit
+	sa.sa_flags = 0;	// abandon the system call that was in progress when the signal hit.
+						// this is the safest option as you rely on your own error handling 
+						// as the "continued" call is likely to be in an unreliable position
 
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);

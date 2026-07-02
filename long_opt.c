@@ -321,4 +321,28 @@ void free_options(Options *opts) {
 		free(opts);
 	}
 }
+// ---------------------------------------
+// this is just to print out the current options for debug / test purpose.
+// ---------------------------------------
+void print_opts(Options *opts){
+	// Print parsed options
+	printf("Parsed Options:\n");
+	printf("  quiet:	%d\n", opts->quiet);
+	printf("  depth:	%d\n", opts->depth);
+	printf("  iterate:  %s\n", opts->iterate ? "true" : "false");
+	printf("  pattern:  \"%s\"\n", opts->pattern? opts->pattern : "(not set)");
+	printf("  verbose:  %s\n", opts->verbose ? "true" : "false");
+	printf("  woo:	  %s\n", opts->woo ? "true" : "false");
+
+	printf("\nExcludes (%d):\n", opts->exclude_count);
+	for (int i = 0; i < opts->exclude_count; i++) {
+		printf("  [%d] \"%s\"\n", i, opts->excludes[i]);
+	}
+	printf("\nOperands (%d):\n", opts->operand_count);
+	for (int i = 0; i < opts->operand_count; i++) {
+		printf("  [%d] \"%s\"\n", i, opts->operands[i]);
+	}
+}
+
+
 

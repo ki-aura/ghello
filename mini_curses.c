@@ -3,7 +3,8 @@
 #include "signal_handler.h"
 #include "mini_curses.h"
 
-void WaitForKey(void) {
+void WaitForKey(void) { 
+	printf("\nDebug: In WaitForKey\n");
 	setlocale(LC_ALL, ""); // Required for wide characters with ncurses
 
 	// Initialize the ncurses screen

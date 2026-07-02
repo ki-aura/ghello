@@ -56,5 +56,7 @@ void print_help(Options* opts, const char *prog_name, const char *const default_
 // Frees the Options structure and all its dynamically allocated members.
 void free_options(Options *opts);
 
+// debug ./ test use
+void print_opts(Options *opts);
 
 #endif // OPTIONS_H

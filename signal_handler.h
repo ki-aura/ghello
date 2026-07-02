@@ -8,7 +8,7 @@
 	//setup_signals();
 	
 	//Put this final thing in main 
-	//return signal_close();
+	//return signal_exit();
 	
 	// **** MODIFY signal_close() if you need to do more clear up
 // --------------------------------------------------------------
@@ -18,8 +18,10 @@
 extern volatile sig_atomic_t sigint_received;
 
 // signal handler functions
-int signal_close(void);
-void signal_handler(int signum);
 void setup_signals(void);
+void signal_handler(int signum);
+
+// example of a close function (with no additional clean up)
+int signal_exit(void);
 
 #endif
