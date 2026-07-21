@@ -14,7 +14,7 @@ static void err_output(char *msg){
 	}
 }
 
-// this just exits, do any clean up before calling this
+// this just determines the exit code, do any clean up before calling this
 int signal_exit(void) {
 	
 	switch (sigint_received) {

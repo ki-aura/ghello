@@ -137,7 +137,7 @@ static void parse_options_complex_validation(Options* opts){
 static void print_version(Options* opts, const char *prog_name) {
 	(void)prog_name;
 	// you can use the prog_name instead of hard coding below
-	printf("GHello World Version: %s\n", GHELLO_VERSION);
+	printf("GHello-World! version: ki-aura %s\n", GHELLO_VERSION);
 	clean_up_and_exit(opts, EXIT_SUCCESS);
 }
 

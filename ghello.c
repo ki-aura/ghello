@@ -1,5 +1,6 @@
 #include <unistd.h>		// Provides access to POSIX operating system API (e.g., fork, exec, read, close)
 #include <stdio.h>		// Provides standard input/output functions (e.g., printf, scanf, file I/O)
+#include <stdlib.h>		// Provides exit functions
 
 #include "ghello.h"
 #include "long_opt.h"
@@ -7,9 +8,10 @@
 #include "mini_curses.h"
 
 static int close_gracefully(Options *opts){
-	// does clean up and close
+	// does any clean up required (e.g. free) and force closes
 	free_options(opts);
-	return signal_exit();
+	exit(signal_exit());
+	return 0;
 }
 
 int main(int argc, char *argv[])
@@ -23,7 +25,7 @@ int main(int argc, char *argv[])
 	
 	// run a standard print and wait
 	for(int i = 0; i<opts->depth; i++) {
-		printf("Hello  World\n");
+		printf("Hello  World!\n");
 		}
 	sleep(4);	// time to allow an interrupt to be tested
 	if(sigint_received) {return close_gracefully(opts);}
